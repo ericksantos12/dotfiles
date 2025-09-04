@@ -1,8 +1,8 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 set -euo pipefail
 
 # Ir para a pasta do repositório (diretório deste script)
-script_dir=${0:A:h}
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$script_dir"
 
 git pull origin main
@@ -17,15 +17,11 @@ doIt() {
         -avh --no-perms . ~
 }
 
-if [[ ${1:-} == "--force" || ${1:-} == "-f" ]]; then
+if [[ "${1:-}" == "--force" || "${1:-}" == "-f" ]]; then
   doIt
 else
-  print -n "This may overwrite existing files in your home directory. Are you sure? (y/n) "
-  read -k 1 REPLY
-  echo
-  if [[ $REPLY == [Yy] ]]; then
+  read -rp "This may overwrite existing files in your home directory. Are you sure? (y/n) " REPLY
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
     doIt
   fi
 fi
-
-unfunction doIt
