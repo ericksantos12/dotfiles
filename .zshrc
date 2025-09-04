@@ -103,10 +103,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# -------------------------------
-# Load other plugins
-# -------------------------------
-eval "$(zoxide init zsh)"
 
 # -------------------------------
 # Load the shell dotfiles
